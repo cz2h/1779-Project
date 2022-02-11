@@ -1,9 +1,10 @@
 import base64
+from models.error import Error
 
 
 class Reply:
 
-    def __init__(self, success=True, error=None, keys=[], content=None):
+    def __init__(self, success=True, error=Error(-1, "Not error message given"), keys=[], content=None):
         self.success = success
         self.error = error
         self.keys = keys
@@ -25,5 +26,4 @@ class Reply:
         if self.content is not None:
             res["content"] = self.content
             return res
-
         return res
