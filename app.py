@@ -3,7 +3,11 @@ from routes.file_routes import file_blueprint
 from config import Config
 from extensions import mysql
 
+from flask_cors import CORS
+
 frontend_app = Flask(__name__)
+CORS(frontend_app)
+
 frontend_app.debug = True
 
 mysql.init_app(frontend_app)

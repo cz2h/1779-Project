@@ -36,11 +36,11 @@ def get_all_file_keys():
         return None
 
 
-def post_key_filename(file_key, file_name):
+def post_key_filename(file_key, file_name, file_size):
     try:
         cnx = extensions.mysql.connect()
         cursor = cnx.cursor()
-        query = post_file_key_and_name(DevConfig.DB_CONFIG['table'], file_key, file_name)
+        query = post_file_key_and_name(DevConfig.DB_CONFIG['table'], file_key, file_name, file_size)
         rows_affect = cursor.execute(query)
         cnx.commit()
         return rows_affect > 0
