@@ -16,3 +16,7 @@ def post_file_key_and_name(table, file_key, file_name, file_size):
     return f"INSERT INTO {table} VALUE (\'{file_key}\', \'{file_name}\', \'{file_size}\')" + \
            'ON DUPLICATE KEY UPDATE filename=\'{name}\', '.format(name=file_name) + \
            f' image_size=\'{file_size}\';'
+
+
+def get_cache_stat(table):
+    return "SELECT * FROM {table};".format(table=table)
