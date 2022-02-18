@@ -54,8 +54,9 @@ def get_memcache_stat():
         cnx = extensions.mysql.connect()
         cursor = cnx.cursor()
         query = get_cache_stat(DevConfig.DB_CONFIG['memcache_stat_table'])
+        print(query)
         cursor.execute(query)
-        rows = cursor.fetchone()
+        rows = cursor.fetchall()
         return rows
     except Exception:
         return False

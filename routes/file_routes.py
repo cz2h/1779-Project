@@ -17,15 +17,6 @@ logger = logging.getLogger(__name__)
 file_blueprint = Blueprint('file_route', __name__, url_prefix='/api')
 
 
-@file_blueprint.route('/test')
-def get_test():
-    data = post_key_filename('k1', 'is not mma.jpg')
-    return {
-        "status": "Who?",
-        "data": data
-    }
-
-
 @file_blueprint.route('/upload', methods=['POST'])
 def post_file():
     key = str(request.form.get('key'))

@@ -9,7 +9,6 @@ memcache_blueprint = Blueprint('memcache_route', __name__, url_prefix='/api/memc
 @memcache_blueprint.route('/stat', methods=['GET'])
 def get_memcache_stat():
     stats = db_get_cache_stat()
-    print(stats)
     if stats is not None or len(stats) > 0:
         return Reply(success=True, stat=stats).to_json()
     return Reply(success=False).to_json()

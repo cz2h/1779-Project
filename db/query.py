@@ -12,14 +12,13 @@ def get_all_file_key_query(table):
 
 
 def post_file_key_and_name(table, file_key, file_name, file_size):
-    print(file_size, file_name)
     return f"INSERT INTO {table} VALUE (\'{file_key}\', \'{file_name}\', \'{file_size}\')" + \
            'ON DUPLICATE KEY UPDATE filename=\'{name}\', '.format(name=file_name) + \
            f' image_size=\'{file_size}\';'
 
 
-def get_cache_stat(table):
-    return "SELECT * FROM {table};".format(table=table)
+def get_cache_stat(table, date='2022-02-18 09:05:00'):
+    return "SELECT * FROM {table} WHERE time_stamp>='{d}';".format(table=table, d=date)
 
 
 def post_update_cache_config(table, capacity, value):
