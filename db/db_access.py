@@ -1,7 +1,8 @@
 import extensions
 from config.Config import DevConfig
 
-from db.query import get_filename_query, get_all_file_key_query, post_file_key_and_name, get_cache_stat
+from db.query import get_filename_query, get_all_file_key_query, post_file_key_and_name, get_cache_stat, \
+    post_update_cache_config
 
 
 def get_filename_by_key(key):
@@ -56,5 +57,18 @@ def get_memcache_stat():
         cursor.execute(query)
         rows = cursor.fetchone()
         return rows
+    except Exception:
+        return False
+
+
+def post_memcache_config(capacity, rep_policy):
+    try:
+        cnx = extensions.mysql.connect()
+        cursor = cnx.cursor()
+        query = post_update_cache_config(DevConfig.DB_CONFIG['memcache_config_table'], capacity, rep_policy)
+        print(query)
+        cursor.execute(query)
+        cnx.commit()
+        return True
     except Exception:
         return False

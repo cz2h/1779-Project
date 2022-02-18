@@ -12,7 +12,8 @@ class DevConfig(object):
         'host': 'localhost',
         'database': 'images',
         'table': 'images.keylist',
-        'memcache_stat_table': 'images.cache_stats'
+        'memcache_stat_table': 'images.cache_stats',
+        'memcache_config_table': 'images.memcache_config'
     }
     MYSQL_DATABASE_USER = 'root'
     MYSQL_DATABASE_PASSWORD = 'oplk1998'

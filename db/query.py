@@ -20,3 +20,8 @@ def post_file_key_and_name(table, file_key, file_name, file_size):
 
 def get_cache_stat(table):
     return "SELECT * FROM {table};".format(table=table)
+
+
+def post_update_cache_config(table, capacity, value):
+    return f"INSERT INTO {table} VALUE (\'{capacity}\', \'{value}\')" + \
+           'ON DUPLICATE KEY UPDATE rep_policy=\'{value}\'; '.format(value=value)
