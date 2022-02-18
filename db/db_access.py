@@ -58,7 +58,8 @@ def get_memcache_stat():
         cursor.execute(query)
         rows = cursor.fetchall()
         return rows
-    except Exception:
+    except Exception as err:
+        print(err)
         return False
 
 

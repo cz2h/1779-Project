@@ -10,12 +10,15 @@ class DevConfig(object):
         'user': 'root',
         'password': 'oplk1998',
         'host': 'localhost',
-        'database': 'images',
-        'table': 'images.keylist',
-        'memcache_stat_table': 'images.cache_stats',
-        'memcache_config_table': 'images.memcache_config'
+        'database': 'Assignment_1',
+        'table': 'keylist',
+        'memcache_stat_table': 'cache_stats',
+        'memcache_config_table': 'memcache_config'
     }
+    # For initializing connect to mysql
     MYSQL_DATABASE_USER = 'root'
     MYSQL_DATABASE_PASSWORD = 'oplk1998'
-    MYSQL_DATABASE_DB = 'images'
+    MYSQL_DATABASE_DB = 'Assignment_1'
     MYSQL_DATABASE_HOST = 'localhost'
+    # Memcache related macro
+    MEMCACHE_SERVER = 'localhost:5001'
