@@ -44,8 +44,8 @@ def post_key_filename(file_key, file_name, file_size):
         query = post_file_key_and_name(DevConfig.DB_CONFIG['table'], file_key, file_name, file_size)
         rows_affect = cursor.execute(query)
         cnx.commit()
-        return rows_affect > 0
-    except Exception:
+        return True
+    except Exception as err:
         return False
 
 

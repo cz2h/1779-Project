@@ -21,4 +21,11 @@ class DevConfig(object):
     MYSQL_DATABASE_DB = 'Assignment_1'
     MYSQL_DATABASE_HOST = 'localhost'
     # Memcache related macro
-    MEMCACHE_SERVER = 'localhost:5001'
+    MEMCACHE_SERVER = 'http://192.168.2.104:5001'
+    END_POINTS = {
+        'put': '/put',
+        'get': '/get',
+        'clear': '/clear',
+        'invalidatekey': '/invalidatekey',
+        'refreshconfiguration': '/refreshconfiguration'
+    }
