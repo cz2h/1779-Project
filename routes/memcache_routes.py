@@ -2,6 +2,8 @@ from flask import Blueprint, request
 
 from models.reply import Reply
 
+from rpc_calls import memcache_rpcs;
+
 from db.db_access import get_memcache_stat as db_get_cache_stat, post_memcache_config as db_post_cache_config
 memcache_blueprint = Blueprint('memcache_route', __name__, url_prefix='/api/memcache')
 
@@ -18,7 +20,7 @@ def get_memcache_stat():
 def post_memcache_config():
     capacity = request.form.get('capacity')
     rep_policy = request.form.get('rep_policy')
-    print(capacity, rep_policy)
     if db_post_cache_config(capacity, rep_policy):
+        res = memcache_rpcs.call_refresh_configuartion()
         return Reply(success=True).to_json()
     return Reply(success=False).to_json()
