@@ -17,6 +17,10 @@ def post_file_key_and_name(table, file_key, file_name, file_size):
            f' image_size=\'{file_size}\';'
 
 
+def delete_cache_stat(table):
+    return "DELETE FROM {table} WHERE capacity>= 0;".format(table=table)
+
+
 def get_cache_stat(table, date='2022-02-18 09:05:00'):
     return "SELECT * FROM {table} WHERE time_stamp>='{d}';".format(table=table, d=date)
 

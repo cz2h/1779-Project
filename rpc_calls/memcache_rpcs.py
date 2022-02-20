@@ -1,5 +1,3 @@
-import json
-
 from config.Config import DevConfig
 import requests
 
@@ -34,7 +32,7 @@ def call_invalidate_key(key):
     data = {
         "key": key,
     }
-    res = requests.post(url, data=json.dumps(data))
+    res = requests.post(url, data=data)
     return res.json()
 
 
