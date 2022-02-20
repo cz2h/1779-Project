@@ -1,3 +1,5 @@
+import datetime
+
 import extensions
 from config.Config import DevConfig
 
@@ -53,7 +55,9 @@ def get_memcache_stat():
     try:
         cnx = extensions.mysql.connect()
         cursor = cnx.cursor()
-        query = get_cache_stat(DevConfig.DB_CONFIG['memcache_stat_table'])
+        query = get_cache_stat(DevConfig.DB_CONFIG['memcache_stat_table'], datetime.datetime.now() -
+                               datetime.timedelta(minutes=10)
+)
         print(query)
         cursor.execute(query)
         rows = cursor.fetchall()
