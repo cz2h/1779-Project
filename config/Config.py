@@ -7,17 +7,17 @@ class DevConfig(object):
     ALLOWED_FORMAT = {'jpg', 'jpeg', 'png', 'gif', 'tiff'}
     FILENAME_SEPARATOR = '_'
     DB_CONFIG = {
-        'user': 'root',
-        'password': 'oplk1998',
+        'user': '',
+        'password': '',
         'host': 'localhost',
         'database': 'Assignment_1',
         'table': 'keylist',
         'memcache_stat_table': 'cache_stats',
         'memcache_config_table': 'memcache_config'
     }
-    # For initializing connect to mysql
-    MYSQL_DATABASE_USER = 'root'
-    MYSQL_DATABASE_PASSWORD = 'oplk1998'
+    # TODO: Provide your local login info.
+    MYSQL_DATABASE_USER = ''
+    MYSQL_DATABASE_PASSWORD = ''
     MYSQL_DATABASE_DB = 'Assignment_1'
     MYSQL_DATABASE_HOST = 'localhost'
     # Memcache related macro
