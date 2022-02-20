@@ -39,7 +39,8 @@ def post_file():
 
         # Save file to local disk first.
         filename = get_sha256(key) + file.filename
-        file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+        currentpath = os.path.abspath(os.getcwd())
+        file.save(os.path.join(currentpath, current_app.config['UPLOAD_FOLDER'], filename))
 
         # Post new file to cache
         file.seek(0)
@@ -71,7 +72,9 @@ def get_file():
     if filename is None:
         return Reply(success=False, error=Error(204, "No such file available")).to_json()
     target_filename = get_sha256(key) + filename
-    with open(os.path.join(current_app.config['UPLOAD_FOLDER'], target_filename), 'rb') as binary_file:
+    currentpath = os.path.abspath(os.getcwd())
+    print(currentpath)
+    with open(os.path.join(currentpath, current_app.config['UPLOAD_FOLDER'], target_filename), 'rb') as binary_file:
         binary_data = binary_file.read()
         base64_data = base64.b64encode(binary_data)
         base64_msg = base64_data.decode()
