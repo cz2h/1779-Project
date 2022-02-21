@@ -62,12 +62,9 @@ def get_file(key_value):
 
     # Interact with cache server first.
     response_from_cache = call_get(key)
-
     if response_from_cache['content'] is not None and response_from_cache['content'] != "None":
         return Reply(success=True, content=response_from_cache['content']).to_json()
-    else:
-        print("Cache miss", response_from_cache)
-
+    # On cache miss
     filename = get_filename_by_key(key)
     if filename is None:
         return Reply(success=False, error=Error(204, "No such file available")).to_json()
@@ -78,6 +75,7 @@ def get_file(key_value):
         binary_data = binary_file.read()
         base64_data = base64.b64encode(binary_data)
         base64_msg = base64_data.decode()
+    call_put(key, base64_msg)
     return Reply(success=True, content=base64_msg).to_json()
 
 
