@@ -20,4 +20,4 @@ frontend_app.register_blueprint(memcache_blueprint)
 frontend_app.config.from_object(Config.DevConfig)
 
 if __name__ == '__main__':
-    frontend_app.run(host='127.0.0.1', port=114)
+    frontend_app.run(host='127.0.0.1', port=5000)

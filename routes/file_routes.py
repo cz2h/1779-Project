@@ -53,9 +53,9 @@ def post_file():
         return Reply(success=False).to_json()
 
 
-@file_blueprint.route('/key/', methods=['POST'])
-def get_file():
-    key = request.args.get('key')
+@file_blueprint.route('/key/<key_value>', methods=['POST'])
+def get_file(key_value):
+    key = key_value
     if key is None:
         return Reply(success=False, error=Error(400, "No param key is given")).to_json()
     key = str(key)

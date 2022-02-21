@@ -16,12 +16,12 @@ class DevConfig(object):
         'memcache_config_table': 'memcache_config'
     }
     # TODO: Provide your local login info.
-    MYSQL_DATABASE_USER = ''
-    MYSQL_DATABASE_PASSWORD = ''
+    MYSQL_DATABASE_USER = 'root'
+    MYSQL_DATABASE_PASSWORD = 'ece1779pass'
     MYSQL_DATABASE_DB = 'Assignment_1'
     MYSQL_DATABASE_HOST = 'localhost'
     # Memcache related macro
-    MEMCACHE_SERVER = 'http://192.168.2.104:5001'
+    MEMCACHE_SERVER = 'http://localhost:5001'
     END_POINTS = {
         'put': '/put',
         'get': '/get',
