@@ -8,6 +8,7 @@ def call_put(key, value):
         "key": key,
         "value": value
     }
+    print("Call put", key)
     res = requests.post(url, data=data)
     return res.json()
 
