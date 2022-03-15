@@ -16,7 +16,7 @@ class DevConfig(object):
 
         # 'host': 'localhost',
         'database': 'Assignment_1',
-        'table': 'keylist',
+        'filename_table': 'file_names',
         'memcache_stat_table': 'cache_stats',
         'memcache_config_table': 'memcache_config'
     }

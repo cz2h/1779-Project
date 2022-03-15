@@ -4,7 +4,7 @@ def post_table_query():
 
 
 def get_filename_query(table, key):
-    return f'SELECT filename FROM {table} WHERE  uniquekey=\'{key}\';'
+    return f'SELECT file_name FROM {table} WHERE  file_key=\'{key}\';'
 
 
 def get_all_file_key_query(table):
@@ -13,8 +13,8 @@ def get_all_file_key_query(table):
 
 def post_file_key_and_name(table, file_key, file_name, file_size):
     return f"INSERT INTO {table} VALUE (\'{file_key}\', \'{file_name}\', \'{file_size}\')" + \
-           'ON DUPLICATE KEY UPDATE filename=\'{name}\', '.format(name=file_name) + \
-           f' image_size=\'{file_size}\';'
+           'ON DUPLICATE KEY UPDATE file_name=\'{name}\', '.format(name=file_name) + \
+           f' file_size=\'{file_size}\';'
 
 
 def delete_cache_stat(table):
