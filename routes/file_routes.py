@@ -32,9 +32,9 @@ def post_file():
     if file:
         # Delete existing file with same key
         file_with_same_key = get_filename_by_key(key)
-        # if file_with_same_key is not None:
-        #     delete_file_from_disk(key, file_with_same_key, current_app.config['UPLOAD_FOLDER'])
-        #     call_invalidate_key(key)
+        if file_with_same_key is not None:
+            s3_access.delete_file_from_s3(key)
+            # call_invalidate_key(key)
 
         if not post_key_filename(key, file.filename, file_size):
             return Reply(success=False, error=Error(500, "Fail to update DB")).to_json()
