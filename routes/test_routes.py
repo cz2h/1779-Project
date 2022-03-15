@@ -6,6 +6,8 @@ from models.reply import Reply
 
 from s3 import s3_access
 
+from db import db_access
+
 import base64
 
 
@@ -36,3 +38,9 @@ def get_file():
     base64_data = base64.b64encode(binary_data)
     base64_msg = base64_data.decode()
     return Reply(success=True, content=base64_msg).to_json()
+
+
+@test_blueprint.route('/sql', methods=['POST'])
+def sql():
+    db_access.init_tables()
+    return Reply(success=True, content='who').to_json()

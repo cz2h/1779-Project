@@ -1,15 +1,30 @@
 import datetime
 
 import extensions
+import pymysql
 from config.Config import DevConfig
 
 from db.query import get_filename_query, get_all_file_key_query, post_file_key_and_name, get_cache_stat, \
     post_update_cache_config, delete_cache_stat
 
 
+def get_connection():
+    config = DevConfig.DB_CONFIG
+    try:
+        conn = pymysql.connect(
+                         host=config['endpoint'],
+                         port=config['port'],
+                         user=config['user'],
+                         password=config['password'])
+    except Exception as e:
+        print(e)
+        return None
+    return conn
+
+
 def get_filename_by_key(key):
     try:
-        cnx = extensions.mysql.connect()
+        cnx = get_connection()
         cursor = cnx.cursor()
         query = get_filename_query(DevConfig.DB_CONFIG['table'], key)
         cursor.execute(query)
@@ -24,7 +39,7 @@ def get_filename_by_key(key):
 
 def get_all_file_keys():
     try:
-        cnx = extensions.mysql.connect()
+        cnx = get_connection()
         cursor = cnx.cursor()
         query = get_all_file_key_query(DevConfig.DB_CONFIG['table'])
         cursor.execute(query)
@@ -41,7 +56,7 @@ def get_all_file_keys():
 
 def post_key_filename(file_key, file_name, file_size):
     try:
-        cnx = extensions.mysql.connect()
+        cnx = get_connection()
         cursor = cnx.cursor()
         query = post_file_key_and_name(DevConfig.DB_CONFIG['table'], file_key, file_name, file_size)
         rows_affect = cursor.execute(query)
@@ -76,6 +91,14 @@ def post_memcache_config(capacity, rep_policy):
         query = post_update_cache_config(DevConfig.DB_CONFIG['memcache_config_table'], capacity, rep_policy)
         cursor.execute(query)
         cnx.commit()
+        return True
+    except Exception:
+        return False
+
+
+def init_tables():
+    try:
+        cnx = get_connection()
         return True
     except Exception:
         return False

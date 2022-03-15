@@ -7,19 +7,19 @@ class DevConfig(object):
     ALLOWED_FORMAT = {'jpg', 'jpeg', 'png', 'gif', 'tiff'}
     FILENAME_SEPARATOR = '_'
     DB_CONFIG = {
-        'user': '',
-        'password': '',
-        'host': 'localhost',
+        'endpoint': 'ece1779.cxbccost2b0y.us-east-1.rds.amazonaws.com',
+        'port': 3306,
+        'region': 'us-east-1',
+        'dbname': 'ece1779',
+        'user': 'E1779usr',
+        'password': '1779Usr!',
+
+        # 'host': 'localhost',
         'database': 'Assignment_1',
         'table': 'keylist',
         'memcache_stat_table': 'cache_stats',
         'memcache_config_table': 'memcache_config'
     }
-    # TODO: Provide your local login info.
-    MYSQL_DATABASE_USER = ''
-    MYSQL_DATABASE_PASSWORD = ''
-    MYSQL_DATABASE_DB = 'Assignment_1'
-    MYSQL_DATABASE_HOST = 'localhost'
     # Memcache related macro
     MEMCACHE_SERVER = 'http://192.168.2.104:5001'
     END_POINTS = {
