@@ -7,6 +7,10 @@ def get_filename_query(table, key):
     return f'SELECT file_name FROM {table} WHERE  file_key=\'{key}\';'
 
 
+def get_caches_url_query():
+    return 'SELECT private_url FROM cache_instances WHERE is_avail=true'
+
+
 def get_all_file_key_query(table):
     return f'SELECT uniquekey FROM {table};'
 

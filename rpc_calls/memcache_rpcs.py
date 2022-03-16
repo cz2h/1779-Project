@@ -36,7 +36,7 @@ def call_invalidate_key(key):
     return res.json()
 
 
-def call_refresh_configuartion():
+def call_refresh_configuration():
     url = DevConfig.MEMCACHE_SERVER + DevConfig.END_POINTS['refreshconfiguration']
     res = requests.post(url)
     return res.json()

@@ -5,7 +5,7 @@ import pymysql
 from config.Config import DevConfig
 
 from db.query import get_filename_query, get_all_file_key_query, post_file_key_and_name, get_cache_stat, \
-    post_update_cache_config, delete_cache_stat
+    post_update_cache_config, delete_cache_stat, get_caches_url_query
 
 
 def get_connection():
@@ -95,6 +95,19 @@ def post_memcache_config(capacity, rep_policy):
         cnx.commit()
         return True
     except Exception:
+        return False
+
+
+def get_all_avail_cache_instances_url():
+    try:
+        cnx = get_connection()
+        cursor = cnx.cursor()
+        cursor.execute(get_caches_url_query())
+        cnx.commit()
+        rows = cursor.fetchall()
+        return rows
+    except Exception as e:
+        print(e)
         return False
 
 
