@@ -5,7 +5,7 @@ import pymysql
 from config.Config import DevConfig
 
 from db.query import get_filename_query, get_all_file_key_query, post_file_key_and_name, get_cache_stat, \
-    post_update_cache_config, delete_cache_stat, get_caches_url_query
+    post_update_cache_config, delete_cache_stat, get_caches_url_query, delete_all_files_query
 
 
 def get_connection():
@@ -51,8 +51,9 @@ def get_all_file_keys():
             return None
         else:
             return file_keys
-    except Exception:
-        return None
+    except Exception as e:
+        print(e)
+        return []
 
 
 def post_key_filename(file_key, file_name, file_size):
@@ -116,4 +117,17 @@ def init_tables():
         cnx = get_connection()
         return True
     except Exception:
+        return False
+
+
+def delete_all_files():
+    try:
+        cnx = get_connection()
+        cursor = cnx.cursor()
+        delete_query = delete_all_files_query(DevConfig.DB_CONFIG['filename_table'])
+        cursor.execute(delete_query)
+        cnx.commit()
+        return True
+    except Exception as e:
+        print(e)
         return False

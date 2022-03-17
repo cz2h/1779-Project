@@ -1,5 +1,5 @@
 from config.Config import DevConfig
-import send_requests
+from rpc_calls import send_requests
 from extensions import hash_router
 
 

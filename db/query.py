@@ -12,7 +12,7 @@ def get_caches_url_query():
 
 
 def get_all_file_key_query(table):
-    return f'SELECT uniquekey FROM {table};'
+    return f'SELECT file_key FROM {table};'
 
 
 def post_file_key_and_name(table, file_key, file_name, file_size):
@@ -23,6 +23,10 @@ def post_file_key_and_name(table, file_key, file_name, file_size):
 
 def delete_cache_stat(table):
     return "DELETE FROM {table} WHERE capacity>= 0;".format(table=table)
+
+
+def delete_all_files_query(table):
+    return f'DELETE FROM {table}'
 
 
 def get_cache_stat(table, date='2022-02-18 09:05:00'):

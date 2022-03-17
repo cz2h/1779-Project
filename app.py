@@ -2,6 +2,7 @@ from flask import Flask
 from routes.file_routes import file_blueprint
 from routes.memcache_routes import memcache_blueprint
 from routes.test_routes import test_blueprint
+from routes.manager_routes import manager_blueprint
 
 from config import Config
 from extensions import mysql
@@ -18,6 +19,7 @@ mysql.init_app(frontend_app)
 frontend_app.register_blueprint(file_blueprint)
 frontend_app.register_blueprint(memcache_blueprint)
 frontend_app.register_blueprint(test_blueprint)
+frontend_app.register_blueprint(manager_blueprint)
 
 frontend_app.config.from_object(Config.DevConfig)
 
