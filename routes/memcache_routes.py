@@ -28,7 +28,7 @@ def post_memcache_config():
 
 
 @memcache_blueprint.route('/resize', methods=['POST'])
-def resize():
+def post_resize():
     fetch_result = get_all_avail_cache_instances_url()
     caches_url = []
     for res in fetch_result:
