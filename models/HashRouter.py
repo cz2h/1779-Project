@@ -15,3 +15,6 @@ class HashRouter:
 
     def set_caches(self, new_caches):
         self.caches_url = new_caches
+
+    def get_all_cache_node_urls(self):
+        return self.caches_url
