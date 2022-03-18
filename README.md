@@ -17,11 +17,11 @@ This is a memcache instance storing (key, name) pair, have different evict polic
 https://github.com/actwang/ECE1779
 
 # API Endpoints:
-/api/upload
-  Endpoint to upload file.
-/api/key/?key=somekey
-  Endpoint to query image.
-/api/manager/clear
-  Endpoint to clear all data.
-/api/memcache/resize
-  Endpoint to announce frontend to resize cache pool
+| Endpoint      | Description |
+| ----------- | ----------- |
+| /api/upload      | Endpoint to upload file.       |
+| /api/key/?key=   | Endpoint to query image.        |
+| /api/manager/clear| Endpoint to clear all data.|
+| /api/memcache/resize| Endpoint to announce frontend to resize cache pool|
+
+
