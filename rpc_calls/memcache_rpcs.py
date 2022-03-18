@@ -5,22 +5,29 @@ from extensions import hash_router
 
 def call_put(key, value):
     server_url = hash_router.get_cache_node_url(key)
+    if server_url == '':
+        return None
     url = server_url + DevConfig.END_POINTS['put']
     data = {
         "key": key,
         "value": value
     }
-    res = send_requests.post(url, data=data)
-    return res.json()
+    send_requests.post(url, data=data)
+    return True
 
 
 def call_get(key):
     server_url = hash_router.get_cache_node_url(key)
+    if server_url == '':
+        return None
     url = server_url + DevConfig.END_POINTS['get']
     data = {
         "key": key,
     }
     res = send_requests.post(url, data=data)
+    if res is None:
+        return None
+    # Handle the response with timeout
     return res.json()
 
 
@@ -34,12 +41,14 @@ def call_clear():
 
 def call_invalidate_key(key):
     server_url = hash_router.get_cache_node_url(key)
+    if server_url == '':
+        return None
     url = server_url + DevConfig.END_POINTS['invalidatekey']
     data = {
         "key": key,
     }
-    res = send_requests.post(url, data=data)
-    return res.json()
+    send_requests.post(url, data=data)
+    return
 
 
 # def call_refresh_configuration():

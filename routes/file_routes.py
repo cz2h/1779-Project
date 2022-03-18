@@ -34,24 +34,18 @@ def post_file():
         file_with_same_key = get_filename_by_key(key)
         if file_with_same_key is not None:
             s3_access.delete_file_from_s3(key)
-            # call_invalidate_key(key)
+            call_invalidate_key(key)
 
         if not post_key_filename(key, file.filename, file_size):
             return Reply(success=False, error=Error(500, "Fail to update DB")).to_json()
 
-        # Save file to local disk first.
         s3_access.save_file_to_s3(key, file)
 
-        # filename = get_sha256(key) + file.filename
-        # currentpath = os.path.abspath(os.getcwd())
-        # file.save(os.path.join(currentpath, current_app.config['UPLOAD_FOLDER'], filename))
-
-        # Post new file to cache
-        # file.seek(0)
-        # binary_data = file.read()
-        # base64_data = base64.b64encode(binary_data)
-        # base64_msg = base64_data.decode()
-        # call_put(key, base64_msg)
+        file.seek(0)
+        binary_data = file.read()
+        base64_data = base64.b64encode(binary_data)
+        base64_msg = base64_data.decode()
+        call_put(key, base64_msg)
         return Reply(success=True).to_json()
     else:
         return Reply(success=False).to_json()
@@ -63,27 +57,21 @@ def get_file():
     if key is None:
         return Reply(success=False, error=Error(400, "No param key is given")).to_json()
     key = str(key)
+    # Interact with cache server first.
+    response_from_cache = call_get(key)
+
+    if response_from_cache is not None and response_from_cache['content'] != 'None':
+        return Reply(success=True, content=response_from_cache['content']).to_json()
+    else:
+        print("Cache miss. response from cache is : ", response_from_cache)
+
     file = s3_access.get_file_from_s3(key)
+    if file is None:
+        return Reply(success=False, error=Error(500, 'No such files available')).to_json()
     binary_data = file.read()
     base64_data = base64.b64encode(binary_data)
     base64_msg = base64_data.decode()
-    # Interact with cache server first.
-    # response_from_cache = call_get(key)
-    #
-    # if response_from_cache['content'] is not None and response_from_cache['content'] != "None":
-    #     return Reply(success=True, content=response_from_cache['content']).to_json()
-    # else:
-    #     print("Cache miss", response_from_cache)
-
-    # filename = get_filename_by_key(key)
-    # if filename is None:
-    #     return Reply(success=False, error=Error(204, "No such file available")).to_json()
-    # target_filename = get_sha256(key) + filename
-    # currentpath = os.path.abspath(os.getcwd())
-    # with open(os.path.join(currentpath, current_app.config['UPLOAD_FOLDER'], target_filename), 'rb') as binary_file:
-    #     binary_data = binary_file.read()
-    #     base64_data = base64.b64encode(binary_data)
-    #     base64_msg = base64_data.decode()
+    call_put(key, base64_msg)
     return Reply(success=True, content=base64_msg).to_json()
 
 

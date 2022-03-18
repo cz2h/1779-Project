@@ -4,6 +4,8 @@ from models.reply import Reply
 
 from db import db_access
 from s3 import s3_access
+from rpc_calls import memcache_rpcs
+
 manager_blueprint = Blueprint('manager_route', __name__, url_prefix='/api/manager')
 
 
@@ -18,4 +20,7 @@ def post_clear_files():
             print(e)
             return Reply(success=False).to_json()
     db_access.delete_all_files()
+
+    # Clear all caches from all cache instances.
+    memcache_rpcs.call_clear()
     return Reply(success=True).to_json()
