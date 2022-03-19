@@ -11,8 +11,8 @@ class DevConfig(object):
         'port': 3306,
         'region': 'us-east-1',
         'dbname': 'ece1779',
-        'user': 'E1779usr',
-        'password': '1779Usr!',
+        'user': '',
+        'password': '',
 
         # 'host': 'localhost',
         'database': 'Assignment_1',
