@@ -5,7 +5,7 @@ from models.reply import Reply
 from rpc_calls import memcache_rpcs
 
 from extensions import hash_router
-from db.db_access import get_memcache_stat as db_get_cache_stat, post_memcache_config as db_post_cache_config, get_all_avail_cache_instances_url
+from db.db_access import get_all_avail_cache_instances_url
 memcache_blueprint = Blueprint('memcache_route', __name__, url_prefix='/api/memcache')
 
 

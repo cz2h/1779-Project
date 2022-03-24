@@ -1,5 +1,7 @@
 import hashlib
 
+import db.db_access
+
 
 class HashRouter:
 
@@ -23,3 +25,7 @@ class HashRouter:
 
     def get_all_cache_node_urls(self):
         return self.caches_url
+
+    def init(self):
+        caches = db.db_access.get_all_avail_cache_instances_url()
+        self.set_caches(caches)

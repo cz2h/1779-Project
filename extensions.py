@@ -7,3 +7,4 @@ mysql = MySQL()
 s3 = boto3.client('s3')
 
 hash_router = HashRouter()
+hash_router.init()

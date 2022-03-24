@@ -1,6 +1,6 @@
 import datetime
 
-import extensions
+# import extensions
 import pymysql
 from config.Config import DevConfig
 
@@ -69,34 +69,34 @@ def post_key_filename(file_key, file_name, file_size):
         return False
 
 
-def get_memcache_stat():
-    try:
-        cnx = extensions.mysql.connect()
-        cursor = cnx.cursor()
-        query = get_cache_stat(DevConfig.DB_CONFIG['memcache_stat_table'], datetime.datetime.now() -
-                               datetime.timedelta(minutes=10)
-)
-        print(query)
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        return rows
-    except Exception as err:
-        print(err)
-        return False
+# def get_memcache_stat():
+#     try:
+#         cnx = extensions.mysql.connect()
+#         cursor = cnx.cursor()
+#         query = get_cache_stat(DevConfig.DB_CONFIG['memcache_stat_table'], datetime.datetime.now() -
+#                                datetime.timedelta(minutes=10)
+# )
+#         print(query)
+#         cursor.execute(query)
+#         rows = cursor.fetchall()
+#         return rows
+#     except Exception as err:
+#         print(err)
+#         return False
 
 
-def post_memcache_config(capacity, rep_policy):
-    try:
-        cnx = extensions.mysql.connect()
-        cursor = cnx.cursor()
-        delete_query = delete_cache_stat(DevConfig.DB_CONFIG['memcache_config_table'])
-        cursor.execute(delete_query)
-        query = post_update_cache_config(DevConfig.DB_CONFIG['memcache_config_table'], capacity, rep_policy)
-        cursor.execute(query)
-        cnx.commit()
-        return True
-    except Exception:
-        return False
+# def post_memcache_config(capacity, rep_policy):
+#     try:
+#         cnx = extensions.mysql.connect()
+#         cursor = cnx.cursor()
+#         delete_query = delete_cache_stat(DevConfig.DB_CONFIG['memcache_config_table'])
+#         cursor.execute(delete_query)
+#         query = post_update_cache_config(DevConfig.DB_CONFIG['memcache_config_table'], capacity, rep_policy)
+#         cursor.execute(query)
+#         cnx.commit()
+#         return True
+#     except Exception:
+#         return False
 
 
 def get_all_avail_cache_instances_url():
