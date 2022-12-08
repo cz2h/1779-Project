@@ -14,7 +14,7 @@ https://github.com/zengchu2/1779frontend/
 
 ### Memcache flask 
 This is a memcache instance storing (key, name) pair, have different evict policy.
-https://github.com/actwang/ECE1779
+https://github.com/actwang/ECE1779 or https://github.com/zengchu2/1779cache/blob/main/README.md (docker ver)
 
 # API Endpoints:
 | Endpoint      | Description |
